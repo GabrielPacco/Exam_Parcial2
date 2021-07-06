@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<title>Gegistro de categoria-My web</title>
+FORM
+<style>
+body{
+	background-color: rgb(90, 0, 90);
+	text-align: center;
+	color: white;
+	font-family: calibri;
+}
+</style>
+</head>
+<h1> FORMULARIO DE REGISTRO </h1>
+<body>
+<Form action="http://localhost:8080/ItemRestService/Add"method="POST">
+<label for="name">Nombre: </label>
+<INPUT type="text" required id="nombre" maxlength="50" size="50"><BR><br>
+
+DESCRIPCIÓN:<br>
+<textarea name="description" required rows="10" cols="70"></textarea><br>
+
+</FORM>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+
+	$.ajax({
+		type: "POST",
+		url: "http://localhost:8080/ItemRestService/Add", 
+		contentType: 'application/json',
+		data: JSON.stringify({"description" : description, "finished":false,
+				category:{"id":1, "name" : name }}),
+		success: function(result){
+			console.log(result);
+			
+			$("#div1").html(result);
+		},
+		error : function(xhr, status) {
+			console.log(xhr);
+		}
+	});
+  });
+});
+</script>
+</head>
+<body>
+
+<div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>
+
+<button>Enviar</button>
+
+</body>
+</html>
